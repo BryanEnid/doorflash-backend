@@ -1,0 +1,42 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "exclude": [
+                    "@babel/plugin-transform-regenerator"
+                ]
+            }
+        ],
+        "@babel/preset-typescript"
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-transform-destructuring",
+            {
+                "loose": true
+            }
+        ],
+        "@babel/proposal-class-properties",
+        // "@babel/proposal-object-rest-spread",
+        // "@babel/plugin-transform-destructuring",
+    ]
+}
+// {
+//     "presets": [
+//         //    "env",
+//         "react",
+//         "stage-0"
+//     ],
+//     "plugins": [
+//         "transform-object-rest-spread",
+//         "transform-async-to-generator",
+//         [
+//             "transform-runtime",
+//             {
+//                 "polyfill": false,
+//                 "regenerator": true
+//             }
+//         ]
+//     ]
+// }
