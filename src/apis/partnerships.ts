@@ -2,8 +2,6 @@ import { Application, Request, Response } from "express"
 import { Model } from "mongoose"
 
 import Database from "../database/config"
-import consola from "consola"
-import chalk from "chalk"
 
 export default class PartnershipsAPI {
     private app: Application;
@@ -26,7 +24,7 @@ export default class PartnershipsAPI {
             this.getData()
 
         } else {
-            throw consola.error(new Error('"partnershipAPI" is already initialized, please don\'t initialize more than once.'))
+            throw new Error('"partnershipAPI" is already initialized, please don\'t initialize more than once.')
         }
     }
 

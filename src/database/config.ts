@@ -1,6 +1,4 @@
 import mongoose from "mongoose"
-import consola from "consola"
-import chalk from "chalk"
 
 //
 import { partnerships, partnershipsMenu } from "./schemas/partnerships"
@@ -13,9 +11,9 @@ export default class Database {
         try {
             mongoose.connect(`${DB_HOST}/${process.env.DB_NAME}`, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
             const db = mongoose.connection
-            consola.success(`${chalk.green('DONE . . . Database running on')} ${DB_HOST}/${process.env.DB_NAME}`)
+            console.log(`DONE . . . Database running on ${DB_HOST}/${process.env.DB_NAME}`)
         } catch {
-            consola.error("database not connected")
+            console.log("database not connected")
         }
     }
 

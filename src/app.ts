@@ -5,8 +5,6 @@ import bodyParser from "body-parser";
 import cors from "cors"
 
 // Development Dependecies----
-import consola from "consola"
-import chalk from "chalk"
 //----------------------------
 
 const app: Application = express();
@@ -28,7 +26,7 @@ doorDash.start()
 
 // Server Connection
 app.listen(port, function () {
-    consola.success(`${chalk.green('DONE . . . Server   running')} ${chalk.blue(`Port: ${port}`)}`)
+    console.log(`DONE . . . Server   running Port: ${port}`)
 });
 
 // Database Connection
