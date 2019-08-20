@@ -9,7 +9,7 @@
     "build:template_engine": "babel src/views -d lib/views -D",
     "dev": "nodemon -e ts,hbs --exec \"npm run compile\" --ignore lib/",
     "tsc": "tsc",
-    "start": "node -r dotenv/config lib/app.js"
+    "start": "node -r lib/app.js"
   },
   "author": "BryanEnid",
   "license": "ISC",
