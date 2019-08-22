@@ -1,5 +1,4 @@
 import puppeteer from "puppeteer"
-import axios from "axios"
 import schedule from "node-schedule"
 
 import Database from "../database/config"
@@ -28,7 +27,7 @@ export default class DoorDash {
 
     public scrappeWithPuppeteer = async () => {
         console.log("Scrapping...")
-        const browser = await puppeteer.launch({ headless: true, devtools: true, defaultViewport: null, args: ['--no-sandbox', '--disable-setuid-sandbox'], });
+        const browser = await puppeteer.launch({ headless: true, devtools: false, defaultViewport: null, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = await browser.newPage();
 
         await page.goto(`${this.URI}/consumer/login/`);
@@ -48,10 +47,7 @@ export default class DoorDash {
         await page.waitForSelector("[data-anchor-id=StoreCard]")
         await this.getRestaurantsData(page, browser)
 
-
         await this.getRestaurantsMenu(page)
-
-
 
         await browser.close();
 
@@ -102,50 +98,58 @@ export default class DoorDash {
 
     getRestaurantsMenu = async (page: any) => {
         console.log("Getting Restaurants menu...")
+        console.log(this.restaurants.length)
         for (let i = 0; i < this.restaurants.length; i++) {
-            let item = this.restaurants[i]
-            let path = item.path
+            try {
+                let item = this.restaurants[i]
+                let path = item.path
 
-            await page.goto(`${this.URI}${path}`)
-            await page.waitForSelector("[data-anchor-id=MenuItem]")
+                await page.goto(`${this.URI}${path}`)
+                await page.waitForSelector("[data-anchor-id=MenuItem]")
 
-            let menu = await page.evaluate(() => {
-                return Array.from(document.querySelectorAll("[data-anchor-id=MenuItem]")).map((item: any) => {
-                    let [data, banner_image] = item.children[0].children[0].children[0].children[0].children[0].children[0].childNodes
-                    let [title, description, price] = data.childNodes
+                let menu = await page.evaluate(() => {
+                    return Array.from(document.querySelectorAll("[data-anchor-id=MenuItem]")).map((item: any) => {
+                        let [data, banner_image] = item.children[0].children[0].children[0].children[0].children[0].children[0].childNodes
+                        let [title, description, price] = data.childNodes
 
-                    if (!title) title = ""
-                    if (!description) description = ""
-                    if (!price) price = ""
-                    if (!banner_image) banner_image = ""
+                        if (!title) title = ""
+                        if (!description) description = ""
+                        if (!price) price = ""
+                        if (!banner_image) banner_image = ""
 
-                    if (title) title = title.textContent
-                    if (description) description = description.textContent
-                    if (price) price = price.textContent
-                    if (banner_image) {
-                        let regex = /https:(.*?).jpg/gm;
-                        let arr;
-                        let str = banner_image.children[0].children[0].children[1].srcset
-                        let result
-                        while ((arr = regex.exec(str)) !== null) {
-                            result = arr[0]
+                        if (title) title = title.textContent
+                        if (description) description = description.textContent
+                        if (price) price = price.textContent
+                        if (banner_image) {
+                            let regex = /https:(.*?).jpg/gm;
+                            let arr;
+                            let str = banner_image.children[0].children[0].children[1].srcset
+                            let result
+                            while ((arr = regex.exec(str)) !== null) {
+                                result = arr[0]
+                            }
+                            banner_image = result
                         }
-                        banner_image = result
-                    }
 
-                    return {
-                        title,
-                        description,
-                        price,
-                        banner_image
-                    }
+                        return {
+                            title,
+                            description,
+                            price,
+                            banner_image
+                        }
+                    })
                 })
-            })
 
-            if (!menu) console.log(menu)
-            item.menu = menu
-            this.scrappedRestaurants.push(item)
+                if (!menu) console.log(menu)
+                item.menu = menu
+                this.scrappedRestaurants.push(item)
+            } catch (err) {
+                console.log("Failed to get menu")
+                return
+            }
+
         }
+
     }
 
     saveFetchedDataToDatabase = async (restaurants: any) => {

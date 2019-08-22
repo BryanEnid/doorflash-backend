@@ -22,7 +22,7 @@ partnershipsAPI.initialize()
 
 import DoorDash from "./scrapings/doorDash"
 const doorDash = new DoorDash()
-doorDash.start()
+// doorDash.start()
 
 // Server Connection
 app.listen(port, function () {

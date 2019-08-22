@@ -9,13 +9,12 @@
     "build:template_engine": "babel src/views -d lib/views -D",
     "dev": "nodemon -e ts,hbs --exec \"npm run compile\" --ignore lib/",
     "tsc": "tsc",
-    "start": "node lib/app.js"
+    "start": "node lib/app.js "
   },
   "author": "BryanEnid",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.5.5",
-    "axios": "^0.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.6.0",
