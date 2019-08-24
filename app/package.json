@@ -1,7 +1,7 @@
 {
-  "name": "markpeer-rest-api",
+  "name": "bryanenid_doorflash-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "REST API of Doordash.com",
   "main": "src/app.mjs",
   "scripts": {
     "compile": "tsc && npm run build && node -r dotenv/config lib/app.js",

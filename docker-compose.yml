@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    build: ./app
+    image: bryanenid/doorflash-api
+    environment:
+      - DB_HOST=mongodb+srv://BryanEnid:PptstCore15@cluster0-cia4k.mongodb.net
+      - DB_NAME=doorflash
+      - DD_USER=apptestbt@gmail.com
+      - DD_PSWD=PptstCore15
+    ports: 
+     - 3000:3000  
+
+  proxy:
+    image: nginx:latest
+    ports: 
+     - 80:80     

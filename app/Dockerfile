@@ -13,16 +13,19 @@ RUN apt-get update && apt-get install -y wget --no-install-recommends \
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
 
-COPY . /app/
-WORKDIR /app
+# COPY . /app/
+# WORKDIR /app
 
-RUN npm install
-RUN npm install puppeteer
+COPY . /usr/src/app/
+WORKDIR /usr/src/app
 
-ENV DB_HOST=mongodb+srv://BryanEnid:PptstCore15@cluster0-cia4k.mongodb.net
-ENV DB_NAME=doorflash
-ENV DD_USER=apptestbt@gmail.com
-ENV DD_PSWD=PptstCore15
+RUN npm i
+RUN npm i puppeteer
+
+# ENV DB_HOST mongodb+srv://BryanEnid:PptstCore15@cluster0-cia4k.mongodb.net
+# ENV DB_NAME doorflash
+# ENV DD_USER apptestbt@gmail.com
+# ENV DD_PSWD PptstCore15
 
 EXPOSE 3000
 
@@ -39,6 +42,12 @@ CMD npm start
 
 # docker login
 # docker push bryanenid/doorflash-api
+
+# docker foreground
+# docker run -d --rm -p 8000:80 -p 8443:443 --name pandorafms pandorafms/pandorafms:latest
+# docker attach --name pandorafms
+# docker stop 301aef99c1f3
+
 
 ###############################
 # docker system prune -a

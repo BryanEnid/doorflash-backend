@@ -57,7 +57,7 @@ var DoorDash = function DoorDash() {
     console.log("Scrapping...");
     var browser = yield _puppeteer["default"].launch({
       headless: true,
-      devtools: true,
+      devtools: false,
       defaultViewport: null,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
@@ -133,54 +133,60 @@ var DoorDash = function DoorDash() {
   function () {
     var _ref3 = _asyncToGenerator(function* (page) {
       console.log("Getting Restaurants menu...");
+      console.log(_this.restaurants.length);
 
       for (var i = 0; i < _this.restaurants.length; i++) {
-        var item = _this.restaurants[i];
-        var path = item.path;
-        yield page["goto"]("".concat(_this.URI).concat(path));
-        yield page.waitForSelector("[data-anchor-id=MenuItem]");
-        var menu = yield page.evaluate(function () {
-          return Array.from(document.querySelectorAll("[data-anchor-id=MenuItem]")).map(function (item) {
-            var _item$children$0$chil = item.children[0].children[0].children[0].children[0].children[0].children[0].childNodes,
-                data = _item$children$0$chil[0],
-                banner_image = _item$children$0$chil[1];
-            var _data$childNodes = data.childNodes,
-                title = _data$childNodes[0],
-                description = _data$childNodes[1],
-                price = _data$childNodes[2];
-            if (!title) title = "";
-            if (!description) description = "";
-            if (!price) price = "";
-            if (!banner_image) banner_image = "";
-            if (title) title = title.textContent;
-            if (description) description = description.textContent;
-            if (price) price = price.textContent;
+        try {
+          var item = _this.restaurants[i];
+          var path = item.path;
+          yield page["goto"]("".concat(_this.URI).concat(path));
+          yield page.waitForSelector("[data-anchor-id=MenuItem]");
+          var menu = yield page.evaluate(function () {
+            return Array.from(document.querySelectorAll("[data-anchor-id=MenuItem]")).map(function (item) {
+              var _item$children$0$chil = item.children[0].children[0].children[0].children[0].children[0].children[0].childNodes,
+                  data = _item$children$0$chil[0],
+                  banner_image = _item$children$0$chil[1];
+              var _data$childNodes = data.childNodes,
+                  title = _data$childNodes[0],
+                  description = _data$childNodes[1],
+                  price = _data$childNodes[2];
+              if (!title) title = "";
+              if (!description) description = "";
+              if (!price) price = "";
+              if (!banner_image) banner_image = "";
+              if (title) title = title.textContent;
+              if (description) description = description.textContent;
+              if (price) price = price.textContent;
 
-            if (banner_image) {
-              var regex = /https:(.*?).jpg/gm;
-              var arr;
-              var str = banner_image.children[0].children[0].children[1].srcset;
-              var result;
+              if (banner_image) {
+                var regex = /https:(.*?).jpg/gm;
+                var arr;
+                var str = banner_image.children[0].children[0].children[1].srcset;
+                var result;
 
-              while ((arr = regex.exec(str)) !== null) {
-                result = arr[0];
+                while ((arr = regex.exec(str)) !== null) {
+                  result = arr[0];
+                }
+
+                banner_image = result;
               }
 
-              banner_image = result;
-            }
-
-            return {
-              title: title,
-              description: description,
-              price: price,
-              banner_image: banner_image
-            };
+              return {
+                title: title,
+                description: description,
+                price: price,
+                banner_image: banner_image
+              };
+            });
           });
-        });
-        if (!menu) console.log(menu);
-        item.menu = menu;
+          if (!menu) console.log(menu);
+          item.menu = menu;
 
-        _this.scrappedRestaurants.push(item);
+          _this.scrappedRestaurants.push(item);
+        } catch (err) {
+          console.log("Failed to get menu");
+          return;
+        }
       }
     });
 

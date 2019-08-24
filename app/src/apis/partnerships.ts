@@ -29,12 +29,12 @@ export default class PartnershipsAPI {
     }
 
     private getData() {
-        this.app.get(`/partnerships/`, async (req: Request, res: Response) => {
+        this.app.get(`/api/v1/partnerships/`, async (req: Request, res: Response) => {
             let document = await this.partnershipsDB.find()
             res.send(document)
         })
 
-        this.app.get(`/partnerships/:name`, async (req: Request, res) => {
+        this.app.get(`/api/v1/partnerships/:name`, async (req: Request, res) => {
             let doc = await this.partnershipsDB.find({ name: req.params.name })
             doc.length != 0 ? res.send(doc) : res.status(404).send({
                 error: {
@@ -45,7 +45,7 @@ export default class PartnershipsAPI {
             })
         })
 
-        this.app.get(`/partnerships/:name/menu?`, async (req: Request, res: Response) => {
+        this.app.get(`/api/v1/partnerships/:name/menu?`, async (req: Request, res: Response) => {
             try {
                 let { limit, skip } = req.query
                 limit = parseInt(limit) || 10
@@ -88,7 +88,7 @@ export default class PartnershipsAPI {
             }
         })
 
-        this.app.get('/partnerships/*', (req: Request, res: Response) => {
+        this.app.get('/api/v1/partnerships/*', (req: Request, res: Response) => {
             res.status(404).send({
                 error: {
                     message: `${req.originalUrl} was not found`,
