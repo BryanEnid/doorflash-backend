@@ -65,7 +65,7 @@ function () {
     value: function getData() {
       var _this = this;
 
-      this.app.get("/partnerships/",
+      this.app.get("/v1/partnerships/",
       /*#__PURE__*/
       function () {
         var _ref = _asyncToGenerator(function* (req, res) {
@@ -77,7 +77,7 @@ function () {
           return _ref.apply(this, arguments);
         };
       }());
-      this.app.get("/partnerships/:name",
+      this.app.get("/v1/partnerships/:name",
       /*#__PURE__*/
       function () {
         var _ref2 = _asyncToGenerator(function* (req, res) {
@@ -97,7 +97,7 @@ function () {
           return _ref2.apply(this, arguments);
         };
       }());
-      this.app.get("/partnerships/:name/menu?",
+      this.app.get("/v1/partnerships/:name/menu?",
       /*#__PURE__*/
       function () {
         var _ref3 = _asyncToGenerator(function* (req, res) {
@@ -182,7 +182,7 @@ function () {
           return _ref3.apply(this, arguments);
         };
       }());
-      this.app.get('/partnerships/*', function (req, res) {
+      this.app.get('*', function (req, res) {
         res.status(404).send({
           error: {
             message: "".concat(req.originalUrl, " was not found"),

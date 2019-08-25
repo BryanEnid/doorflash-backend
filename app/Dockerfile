@@ -1,4 +1,4 @@
-FROM node:10.15
+FROM node:lts
 
 RUN apt-get update && apt-get install -y wget --no-install-recommends \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -13,53 +13,13 @@ RUN apt-get update && apt-get install -y wget --no-install-recommends \
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
 
-# COPY . /app/
-# WORKDIR /app
+COPY . /app/
+WORKDIR /app
 
-COPY . /usr/src/app/
-WORKDIR /usr/src/app
-
-RUN npm i
+RUN npm i --production
 RUN npm i puppeteer
-
-# ENV DB_HOST mongodb+srv://BryanEnid:PptstCore15@cluster0-cia4k.mongodb.net
-# ENV DB_NAME doorflash
-# ENV DD_USER apptestbt@gmail.com
-# ENV DD_PSWD PptstCore15
 
 EXPOSE 3000
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD npm start
-
-
-# docker build -t bryanenid/doorflash-api . (DONT FORGET THE DOT)
-
-#      TESTING
-# docker run -it -p 3000:3000 bryanenid/doorflash-api (add 'sh' for the shell)
-# docker ps -a
-# docker pause 5e93e617f050
-
-# docker login
-# docker push bryanenid/doorflash-api
-
-# docker foreground
-# docker run -d --rm -p 8000:80 -p 8443:443 --name pandorafms pandorafms/pandorafms:latest
-# docker attach --name pandorafms
-# docker stop 301aef99c1f3
-
-
-###############################
-# docker system prune -a
-
-# Kill all running containers
-# docker kill $(docker ps -a -q)
-
-# Delete all stopped containers (including data-only containers)
-# docker rm $(docker ps -a -q)
-
-# Delete all 'untagged/dangling' (<none>) images
-# docker rmi $(docker images -q -f dangling=true)
-
-# Delete ALL images
-# docker rmi $(docker images -q)
