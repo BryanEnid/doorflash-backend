@@ -27,7 +27,7 @@ export default class DoorDash {
 
     public scrappeWithPuppeteer = async () => {
         console.log("Scrapping...")
-        const browser = await puppeteer.launch({ headless: true, devtools: false, defaultViewport: null, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+        const browser = await puppeteer.launch({ headless: false, devtools: false, defaultViewport: null, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = await browser.newPage();
 
         await page.goto(`${this.URI}/consumer/login/`);

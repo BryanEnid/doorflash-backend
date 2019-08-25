@@ -19,6 +19,11 @@ WORKDIR /app
 RUN npm i --production
 RUN npm i puppeteer
 
+ENV DB_HOST=mongodb+srv://BryanEnid:PptstCore15@cluster0-cia4k.mongodb.net
+ENV DB_NAME=doorflash
+ENV DD_USER=apptestbt@gmail.com
+ENV DD_PSWD=PptstCore15
+
 EXPOSE 3000
 
 ENTRYPOINT ["dumb-init", "--"]

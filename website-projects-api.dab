@@ -1,0 +1,39 @@
+{
+  "Services": {
+    "express": {
+      "Env": [
+        "DB_HOST=mongodb+srv://BryanEnid:PptstCore15@cluster0-cia4k.mongodb.net",
+        "DB_NAME=doorflash",
+        "DD_USER=apptestbt@gmail.com",
+        "DD_PSWD=PptstCore15"
+      ],
+      "Image": "bryanenid/doorflash-api@sha256:dbb46ef71b238a6bbd8917d0456f5c57c37e8af64e38d45ab099682b2e117441",
+      "Networks": [
+        "default"
+      ],
+      "Ports": [
+        {
+          "Port": 3000,
+          "Protocol": "tcp"
+        }
+      ]
+    },
+    "nginx": {
+      "Image": "bryanenid/nginx@sha256:a3c400e5855a29ea367ff04da09bdffcfc50dbc6ff9a9b48b2d7f074eb302806",
+      "Networks": [
+        "default"
+      ],
+      "Ports": [
+        {
+          "Port": 80,
+          "Protocol": "tcp"
+        },
+        {
+          "Port": 443,
+          "Protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "Version": "0.1"
+}

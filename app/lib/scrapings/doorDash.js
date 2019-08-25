@@ -56,7 +56,7 @@ var DoorDash = function DoorDash() {
   _asyncToGenerator(function* () {
     console.log("Scrapping...");
     var browser = yield _puppeteer["default"].launch({
-      headless: true,
+      headless: false,
       devtools: false,
       defaultViewport: null,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
