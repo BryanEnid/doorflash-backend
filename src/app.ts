@@ -20,10 +20,6 @@ import PartnershipsAPI from "./apis/partnerships"
 const partnershipsAPI = new PartnershipsAPI(app)
 partnershipsAPI.initialize()
 
-// import DoorDash from "./scrapings/doorDash"
-// const doorDash = new DoorDash()
-// doorDash.start()
-
 // Server Connection
 app.listen(port, function () {
     console.log(`DONE . . . Server   running Port: ${port}`)

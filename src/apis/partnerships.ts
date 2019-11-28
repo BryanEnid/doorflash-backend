@@ -29,8 +29,15 @@ export default class PartnershipsAPI {
     }
 
     private getData() {
+
         this.app.get(`/v1/partnerships/`, async (req: Request, res: Response) => {
-            let document = await this.partnershipsDB.find()
+            let document;
+            try {
+                document = await this.partnershipsDB.find()
+            } catch (e) {
+                document = new Error("Database is empty")
+            }
+
             res.send(document)
         })
 
