@@ -18,21 +18,21 @@ Creates a REST Api, using Express, and the view part of the MVC uses React.js.
 - React.js
 
 ### End Points
-Domain name: https://api.bryanenid.com
+Domain name: https://doorflash-api.azurewebsites.net
 
-A list of stores: Example: [https://api.bryanenid.com/v1/partnerships](https://api.bryanenid.com/v1/partnerships)
+A list of stores: Example: [https://doorflash-api.azurewebsites.net/v1/partnerships](https://doorflash-api.azurewebsites.net/v1/partnerships)
 ```
 /v1/partnerships
 ```
 
 
-Information about the selected store: Example: [https://api.bryanenid.com/v1/partnerships/farm_burger](https://api.bryanenid.com/v1/partnerships/farm_burger)
+Information about the selected store: Example: [https://doorflash-api.azurewebsites.net/v1/partnerships/farm_burger](https://doorflash-api.azurewebsites.net/v1/partnerships/farm_burger)
 ```
 /v1/partnerships/{NAME_OF_THE_PARTNERSHIP}
 ```
 
 
-Menu of the selected store: Example: [https://api.bryanenid.com/v1/partnerships/farm_burger/menu](https://api.bryanenid.com/v1/partnerships/farm_burger/menu)
+Menu of the selected store: Example: [https://doorflash-api.azurewebsites.net/v1/partnerships/farm_burger/menu](https://doorflash-api.azurewebsites.net/v1/partnerships/farm_burger/menu)
 ```
 /v1/partnerships/{NAME_OF_THE_PARTNERSHIP}/menu
 ```
