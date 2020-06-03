@@ -1,4 +1,4 @@
-### DoorFlash: [Demo](https://bryanenid.github.io/doorflash/)
+### DoorFlash
 
 ![](https://i.ibb.co/k5mnMwy/Capture.png)
 A copy of DoorDash.com, A webscrapper that uses Puppeter which scraps all the data from a specific username only for itself and then saves all the data to MongoDB.
