@@ -1,7 +1,5 @@
 ### DoorFlash: [Demo](https://bryanenid.github.io/doorflash/)
 
-SSSSSSSLLLLLLLL https://stackoverflow.com/a/17792053/9356222
-
 ![](https://i.ibb.co/k5mnMwy/Capture.png)
 A copy of DoorDash.com, A webscrapper that uses Puppeter which scraps all the data from a specific username only for itself and then saves all the data to MongoDB.
 Creates a REST Api, using Express, and the view part of the MVC uses React.js.
