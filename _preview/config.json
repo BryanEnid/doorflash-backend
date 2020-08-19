@@ -1,0 +1,15 @@
+{
+  "name": "Web-Scrapper for (Doorflash, UberEats, Postmates, GrubHub)",
+  "image_names": ["preview1.png"],
+  "technologies": [
+    { "name": "React.js", "colors": ["#20232a", "#61dafb"] },
+    { "name": "TypeScript", "colors": ["#20232a", "#61dafb"] },
+    { "name": "MongoDB", "colors": ["#413020", "#76b662"] },
+    { "name": "Node.js", "colors": ["#333333", "#8cc64c"] },
+    { "name": "Express.js", "colors": ["black", "white"] }
+  ],
+  "APIs": [""],
+  "others": ["Docker", "Puppeteer.js", "NGINX", "Linux", "Digital Ocean"],
+  "app_type": "web",
+  "company": "Personal Project"
+}
