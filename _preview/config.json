@@ -1,5 +1,5 @@
 {
-  "name": "Web-Scrapper for (Doorflash, UberEats, Postmates, GrubHub)",
+  "name": "Web-Scraper for (Doorflash, UberEats, Postmates, GrubHub)",
   "image_names": ["preview1.png"],
   "technologies": [
     { "name": "React.js", "colors": ["#20232a", "#61dafb"] },
